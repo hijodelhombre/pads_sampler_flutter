@@ -2,12 +2,15 @@ name: Build Flutter Android APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      CI: true
 
     steps:
       - name: Checkout repo
@@ -26,7 +29,7 @@ jobs:
       - name: Build APK
         run: |
           cd pads_sampler
-          flutter build apk --release --no-tree-shake-icons
+          flutter build apk --release --no-daemon --no-tree-shake-icons
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

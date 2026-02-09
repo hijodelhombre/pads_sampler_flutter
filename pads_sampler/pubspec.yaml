@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  just_audio: ^0.9.36
-  file_selector: ^1.0.3
+  just_audio: ^0.9.46
+  file_selector: ^1.1.0
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
