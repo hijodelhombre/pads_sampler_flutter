@@ -11,7 +11,7 @@ class PadsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: PadScreen(),
     );
@@ -19,29 +19,29 @@ class PadsApp extends StatelessWidget {
 }
 
 class PadScreen extends StatefulWidget {
+  const PadScreen({super.key});
+
   @override
   State<PadScreen> createState() => _PadScreenState();
 }
 
 class _PadScreenState extends State<PadScreen> {
-  final AudioPlayer player = AudioPlayer();
-  String? audioPath;
+  final AudioPlayer _player = AudioPlayer();
 
-  Future<void> pickAndPlay() async {
+  Future<void> _pickAndPlay() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.audio,
     );
 
-    if (result != null) {
-      audioPath = result.files.single.path;
-      await player.setFilePath(audioPath!);
-      player.play();
+    if (result != null && result.files.single.path != null) {
+      await _player.setFilePath(result.files.single.path!);
+      _player.play();
     }
   }
 
   @override
   void dispose() {
-    player.dispose();
+    _player.dispose();
     super.dispose();
   }
 
@@ -51,20 +51,20 @@ class _PadScreenState extends State<PadScreen> {
       backgroundColor: Colors.black,
       body: Center(
         child: GestureDetector(
-          onTap: pickAndPlay,
+          onTap: _pickAndPlay,
           child: Container(
-            width: 120,
-            height: 120,
+            width: 140,
+            height: 140,
             decoration: BoxDecoration(
               color: Colors.orange,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: const Center(
               child: Text(
                 "PAD",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
