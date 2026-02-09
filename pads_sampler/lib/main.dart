@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 
 void main() {
   runApp(const PadsApp());
@@ -29,12 +29,17 @@ class _PadScreenState extends State<PadScreen> {
   final AudioPlayer _player = AudioPlayer();
 
   Future<void> _pickAndPlay() async {
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.audio,
+    final XFile? file = await openFile(
+      acceptedTypeGroups: [
+        XTypeGroup(
+          label: 'audio',
+          extensions: ['mp3', 'wav', 'ogg'],
+        ),
+      ],
     );
 
-    if (result != null && result.files.single.path != null) {
-      await _player.setFilePath(result.files.single.path!);
+    if (file != null) {
+      await _player.setFilePath(file.path);
       _player.play();
     }
   }
