@@ -29,7 +29,7 @@ jobs:
       - name: Build APK
         run: |
           cd pads_sampler
-          flutter build apk --release --no-daemon --no-tree-shake-icons
+          flutter build apk --release --no-tree-shake-icons
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
