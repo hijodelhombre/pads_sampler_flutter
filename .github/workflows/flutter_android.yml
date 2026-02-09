@@ -11,7 +11,7 @@ jobs:
 
     env:
       CI: true
-
+      WATCHER_USE_POLLING: true
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
